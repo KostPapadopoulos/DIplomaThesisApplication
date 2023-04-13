@@ -4,22 +4,44 @@ package diplomas_mgt_app_skeleton.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+
+import javax.persistence.*;
 import javax.swing.*;
 import java.util.Collection;
+import java.util.Collections;
 
 @Getter
 @Setter
-public class User {
+@Entity
+@Table(name = "USER_")
+public class User implements UserDetails {
+
+    @Id
+    @Column (name = "us_id")
+    private int us_id;
+
+    @Column (name = "username", unique = true)
     private String userName;
+
+    @Column (name = "password_")
     private String password;
+
+    @Enumerated (EnumType.STRING)
+    @Column (name = "role_")
     private Role role;
 
+    /*
     public User(String userName, String password, Role role) {
         this.userName = userName;
         this.password = password;
         this.role = role;
     }
+    */
+    // Mporei na mhn xreiazetai kan constructor
 
     // TODO Professor acc has to enter a specific PIN in order to create his account
     /*
@@ -30,7 +52,18 @@ public class User {
     */
     // TODO We have to create getAuthority() which extends GrantedAuthority (maybe a class containing all authorities ie selectThesis)
 
-    public Collection<? extends GrantedAuthority> getAuthority() {}
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority((role.name()));
+        return Collections.singletonList(authority);
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
     public boolean isAccountNonExpired() {
         // if account is non expired return true
         // else false
