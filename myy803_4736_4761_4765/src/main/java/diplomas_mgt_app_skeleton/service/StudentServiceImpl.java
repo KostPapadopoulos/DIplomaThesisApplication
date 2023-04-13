@@ -2,6 +2,7 @@ package diplomas_mgt_app_skeleton.service;
 
 import diplomas_mgt_app_skeleton.dao.StudentDAO;
 import diplomas_mgt_app_skeleton.model.Student;
+import diplomas_mgt_app_skeleton.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,26 @@ public class StudentServiceImpl implements StudentService {
         else {
             throw new RuntimeException("Did not find student with id: " + st_id);
         }
+    }
+
+    @Override
+    public void saveProfile(Student theStudent) {
+        
+    }
+
+    @Override
+    public Student retrieveProfile(int st_id) {
+        return null;
+    }
+
+    @Override
+    public List<Subject> listStudentSubjects() {
+        return null;
+    }
+
+    @Override
+    public void applyToSubject(String str, int in) {
+
     }
 
     @Override

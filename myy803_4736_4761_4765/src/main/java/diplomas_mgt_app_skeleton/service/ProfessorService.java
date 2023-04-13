@@ -6,8 +6,18 @@ import java.util.List;
 
 public interface ProfessorService {
 
+    public Professor retrieveProfile(String profile);
 
-    public void save(Professor theProfessor);
+    public void saveProfile(Professor theprofessor);
 
-    public void deleteById(int pr_id);
+    public List<Subject> listProfessorSubjects(int pr_id);
+
+    public void addSubject(int pr_id, Subject newSubject);
+
+    public List<Application> listApplications(String str, int in);  // Giati pairnei String kai int ?????
+
+    public List<Thesis> listProfessorTheses(int pr_id);
+
+    public void assignSubject(String str, int in);  // Pali to idio me prin
+
 }
