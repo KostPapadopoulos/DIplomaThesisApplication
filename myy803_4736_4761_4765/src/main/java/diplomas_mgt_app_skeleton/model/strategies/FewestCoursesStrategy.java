@@ -2,29 +2,36 @@ package diplomas_mgt_app_skeleton.model.strategies;
 
 import diplomas_mgt_app_skeleton.model.Application;
 import diplomas_mgt_app_skeleton.model.Student;
+import diplomas_mgt_app_skeleton.model.Subject;
 import diplomas_mgt_app_skeleton.model.Thesis;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class FewestCoursesStrategy extends TemplateStrategyAlgorithm {
-    public FewestCoursesStrategy(Thesis thesis){
-        Student testStudent;
-        ArrayList< Student> test = new ArrayList<Student>();
-        test = thesis.getApplicants();
-        int min = test.get(0).getNumberOfRemCourses();
-        for (int i = 1 ; i < test.size(); i++){
-            if (test.get(i).getNumberOfRemCourses() < min){
-                min = test.get(i).getNumberOfRemCourses();
-            }
-        }
-        Collections.sort(test, new Student.NumberOfRemCoursesComparator());
-        test.get(0)
-        // TODO WE HAVE WRITTEN BULLSHIT NEEDS FIXING
-    }
+
+    public FewestCoursesStrategy () {}
 
     @Override
     public int compareApplications(Application app1, Application app2) {
-        app1.getApplications();
+        Student firstStudent = app1.getStudent();
+        Student secondStudent = app2.getStudent();
+        if (firstStudent.getNumberOfRemCourses() < secondStudent.getNumberOfRemCourses()){
+            return firstStudent.getSt_id();
+        }
+        else if (firstStudent.getNumberOfRemCourses() > secondStudent.getNumberOfRemCourses()){
+            return secondStudent.getSt_id();
+        }
+        else {
+            ArrayList<Integer> tempList = new ArrayList<Integer>();
+            tempList.add(firstStudent.getSt_id());
+            tempList.add(secondStudent.getSt_id());
+            Random random = new Random();
+            Integer result = tempList.get(random.nextInt(tempList.size()));
+            return result;
+        }
     }
+
 }
