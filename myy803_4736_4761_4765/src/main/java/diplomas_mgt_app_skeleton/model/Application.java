@@ -24,6 +24,12 @@ public class Application {
     @Column (name = "student")
     private Student student;
 
+    public Application() {}
+
+    public Application(Subject subject, Student student) {
+        this.subject = subject;
+        this.student = student;
+    }
     public Application (int ap_id, Subject subject, Student student){
         this.ap_id = ap_id;
         this.subject = subject;

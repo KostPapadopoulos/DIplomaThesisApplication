@@ -22,12 +22,20 @@ public class Thesis {
     @Column (name = "subject")
     private Subject subject;
 
-    @Column (name = "supervisor")
-    private Professor supervisor;
+    @Column(name = "student")
+    private Student student;
+    // TODO prepei na to baloyme kai sthn bash
 
-    public Thesis(int th_id, Professor supervisor, Subject subject) {
+    public Thesis() {}
+
+    public Thesis(Student student, Subject subject){
+        this.student = student;
+        this.subject = subject;
+    }
+
+    public Thesis(int th_id, Student student, Subject subject) {
         this.th_id = th_id;
-        this.supervisor = supervisor;
+        this.student = student;
         this.subject = subject;
     }
 }

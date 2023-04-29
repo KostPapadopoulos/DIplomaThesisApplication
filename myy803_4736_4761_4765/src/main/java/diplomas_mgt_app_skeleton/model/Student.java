@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 
 
 @Getter
@@ -33,6 +34,19 @@ public class Student {
     @Column(name = "number_of_courses")
     private int numberOfRemCourses;
 
+    @Column(name = "applications")
+    private ArrayList<Application> applications;
+
+    public Student() {}
+
+    public Student(String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses, String password){
+        this.fullName = fullName;
+        this.yearOfStudies = yearOfStudies;
+        this.currentAvgGrade = currentAvgGrade;
+        this.numberOfRemCourses = numberOfRemCourses;
+        this.password = password;
+        this.applications = new ArrayList<>();
+    }
     public Student(int st_id, String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses, String password) {
         this.st_id = st_id;
         this.fullName = fullName;
@@ -40,5 +54,6 @@ public class Student {
         this.currentAvgGrade = currentAvgGrade;
         this.numberOfRemCourses = numberOfRemCourses;
         this.password = password;
+        this.applications = new ArrayList<>();
     }
 }

@@ -34,14 +34,21 @@ public class User implements UserDetails {
     @Column (name = "role_")
     private Role role;
 
-    /*
+    public User() {}
+
     public User(String userName, String password, Role role) {
         this.userName = userName;
         this.password = password;
         this.role = role;
     }
-    */
-    // Mporei na mhn xreiazetai kan constructor
+
+    public User(int us_id, String userName, String password, Role role){
+        this.us_id = us_id;
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
+    }
+
 
     // TODO Professor acc has to enter a specific PIN in order to create his account
     /*
