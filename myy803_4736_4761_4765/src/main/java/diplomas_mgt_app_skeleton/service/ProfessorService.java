@@ -2,6 +2,7 @@ package diplomas_mgt_app_skeleton.service;
 
 import diplomas_mgt_app_skeleton.model.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface ProfessorService {
@@ -10,14 +11,14 @@ public interface ProfessorService {
 
     public void saveProfile(Professor theprofessor);
 
-    public List<Subject> listProfessorSubjects(int pr_id);
+    List<Subject> listProfessorSubjects(String username);
 
-    public void addSubject(int pr_id, Subject newSubject);
+    void addSubject(String profUsername, Subject newSubject);
 
-    public List<Application> listApplications(String str, int in);  // Giati pairnei String kai int ?????
+    public List<Application> listApplications(String str);
 
-    public List<Thesis> listProfessorTheses(int pr_id);
+    public List<Thesis> listProfessorThesis(String userName);
 
-    public void assignSubject(String str, int in);  // Pali to idio me prin
+    public void assignSubject(String str, String in, int th1, int th2);
 
 }
