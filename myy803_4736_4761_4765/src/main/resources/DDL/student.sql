@@ -11,5 +11,6 @@ CREATE TABLE `STUDENT` (
     year_of_studies int(2) DEFAULT NULL,
     current_avg_grade VARCHAR(40)  DEFAULT NULL,
     number_of_courses INT(2) DEFAULT NULL,
-    st_password VARCHAR(100) NOT NULL
+    st_password VARCHAR(100) NOT NULL,
+    applications VARCHAR(1000) DEFAULT NULL
 );

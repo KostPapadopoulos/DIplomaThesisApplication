@@ -9,7 +9,6 @@ CREATE TABLE `SUBJECT` (
     title VARCHAR(100) DEFAULT NULL,
     objective VARCHAR(1000) DEFAULT NULL,
     sub_availability BOOLEAN DEFAULT FALSE,
-    professor VARCHAR(1000) DEFAULT NULL
-)
-
-DELETE FROM `SUBJECT` (sub_availability) VALUES (false);
+    professor VARCHAR(1000) DEFAULT NULL,
+    applications VARCHAR(1000) DEFAULT NULL
+);

@@ -8,5 +8,7 @@ CREATE TABLE `PROFESSOR` (
     pr_id INT(10) PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100) DEFAULT NULL,
     specialty VARCHAR(100) DEFAULT NULL,
-    pr_password VARCHAR(100) NOT NULL
+    pr_password VARCHAR(100) NOT NULL,
+    my_subjects VARCHAR(1000) DEFAULT NULL,
+    my_thesis VARCHAR(1000) DEFAULT NULL
 );
