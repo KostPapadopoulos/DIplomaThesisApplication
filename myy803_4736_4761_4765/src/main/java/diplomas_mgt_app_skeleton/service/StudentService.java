@@ -9,15 +9,17 @@ import java.util.List;
 
 public interface StudentService {
 
-    Student findById(int st_id);
+    public Student findById(int st_id);
 
-    List<Student> findAll();
+    public List<Subject> listSubjects();
+
+    public Student findByUsername(String username);
 
     public void saveProfile(Student theStudent);
 
-    public Student retrieveProfile(int st_id);
+    public Student retrieveProfile(String username);
 
-    List<Application> listStudentApplications(Student theStudent);
+    public List<Application> listStudentApplications(Student theStudent);
 
     public void applyToSubject(String subjectName, Student theStudent);
 

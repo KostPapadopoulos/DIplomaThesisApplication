@@ -47,9 +47,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> findAll() {
-        List<Student> theList = studentRepository.findAll();
+    public List<Subject> listSubjects() {
+        List<Subject> theList = subjectDAO.findAll();
         return theList;
+    }
+
+    @Override
+    public Student findByUsername(String username) {
+        Student theStudent = studentRepository.findByUsername(username);
+        return theStudent;
     }
 
     @Override
@@ -59,10 +65,11 @@ public class StudentServiceImpl implements StudentService {
         
     }
 
+
     @Override
     @Transactional
-    public Student retrieveProfile(int st_id) {
-        Student theStudent = studentRepository.findById(st_id);
+    public Student retrieveProfile(String stdName) {
+        Student theStudent = studentRepository.findByUsername(stdName);
         return theStudent;
     }
 
