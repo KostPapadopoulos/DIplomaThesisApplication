@@ -9,6 +9,7 @@ CREATE TABLE `SUBJECT` (
     title VARCHAR(100) DEFAULT NULL,
     objective VARCHAR(1000) DEFAULT NULL,
     sub_availability BOOLEAN DEFAULT FALSE,
-    professor VARCHAR(1000) DEFAULT NULL,
-    applications VARCHAR(1000) DEFAULT NULL
+    professor_id INT(10) ,
+    applications VARCHAR(1000) DEFAULT NULL,
+    FOREIGN KEY (professor_id) REFERENCES `PROFESSOR`(pr_id)
 );
