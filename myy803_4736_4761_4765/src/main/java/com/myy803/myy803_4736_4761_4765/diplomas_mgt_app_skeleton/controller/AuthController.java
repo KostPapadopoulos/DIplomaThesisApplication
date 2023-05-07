@@ -1,5 +1,7 @@
 package com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller;
 
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Role;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.User;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,11 @@ public class AuthController {
 
     @Autowired
     public UserService userService;
+
+    @RequestMapping("/")
+    public String redierctToLogin(){
+        return "authentication/signin";
+    }
 
     @RequestMapping("/login")
     public String login() {
@@ -33,8 +40,9 @@ public class AuthController {
             return "authentication/signin";
         }
 
-        User myUser = theUser;
-        userService.saveUser(myUser);
+        userService.saveUser(theUser);
+
+
         theModel.addAttribute("successMessage", "User registered successfully!");
         return "authentication/signin";
     }

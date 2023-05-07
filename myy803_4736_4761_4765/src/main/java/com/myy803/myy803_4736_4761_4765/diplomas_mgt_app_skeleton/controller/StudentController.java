@@ -3,11 +3,13 @@ package com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Application;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.User;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,16 +34,15 @@ public class StudentController {
         this.subjectService = theSubjectService;
     }
 
-    @RequestMapping("/student/main-menu")
+    @RequestMapping("/main-menu")
     public String getStudentMainMenu() {
         return "/student/main-menu";
     }
 
-    @RequestMapping("student/profile")
+    @RequestMapping("/profile")
     public String retreiveProfile(Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String stdName = auth.getName();
-        Student theStudent = studentService.retrieveProfile(stdName);
+        Student theStudent = studentService.retrieveProfile(auth.getName());
         theModel.addAttribute("student", theStudent);
         return "student/profile";
     }
@@ -62,32 +63,26 @@ public class StudentController {
     @RequestMapping("/applications-list")
     public String listStudentApplications(Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String stdName = auth.getName();
-        Student theStudent = studentService.retrieveProfile(stdName);
+        Student theStudent = studentService.retrieveProfile(auth.getName());
         List<Application> allApplications = studentService.listStudentApplications(theStudent);
         theModel.addAttribute("applications list", allApplications);
-
         return "/student/applications-list";
     }
 
     @RequestMapping("/showFormForEdit")
     public String editProfile(Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String stdName = auth.getName();
-        Student theStudent = studentService.retrieveProfile(stdName);
+        Student theStudent = studentService.retrieveProfile(auth.getName());
         theModel.addAttribute("student", theStudent);
-
         return "student/student-form";
     }
 
     @RequestMapping("/applyToSubect")
     public String applyToSubject(@RequestParam("subjectid") int sub_id, Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String stdName = auth.getName();
-        Student theStudent = studentService.retrieveProfile(stdName);
+        Student theStudent = studentService.retrieveProfile(auth.getName());
         Subject theSubject = subjectService.findById(sub_id);
         studentService.applyToSubject(theSubject.getTitle(), theStudent);
-
         return "student/subject-list";
     }
 
