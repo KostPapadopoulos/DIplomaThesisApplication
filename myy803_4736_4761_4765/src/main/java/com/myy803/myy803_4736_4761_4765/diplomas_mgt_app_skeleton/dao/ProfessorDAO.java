@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProfessorDAO extends JpaRepository<Professor, Integer> {
 
-    public Professor findById(int pr_id);
-
-    public Professor findByUser(User theUser);
+    public Professor findByUsername(String userName);
 
 }
