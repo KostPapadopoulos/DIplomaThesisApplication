@@ -6,6 +6,7 @@ import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.dao.SubjectDAO
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Application;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,14 +38,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Student findById(int st_id) {
-        Student result = studentRepository.findById(st_id);
+    public Student findByUsername(String userName) {
+        Student result = studentRepository.findByUsername(userName);
 
         if (result != null){
             return result;
         }
         else {
-            throw new RuntimeException("Did not find student with id: " + st_id);
+            throw new RuntimeException("Did not find student with id: " + userName);
         }
     }
 
@@ -52,12 +53,6 @@ public class StudentServiceImpl implements StudentService {
     public List<Subject> listSubjects() {
         List<Subject> theList = subjectDAO.findAll();
         return theList;
-    }
-
-    @Override
-    public Student findByUsername(String username) {
-        Student theStudent = studentRepository.findByUsername(username);
-        return theStudent;
     }
 
     @Override
@@ -70,8 +65,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     @Transactional
-    public Student retrieveProfile(String stdName) {
-        Student theStudent = studentRepository.findByUsername(stdName);
+    public Student retrieveProfile(String userName ) {
+        Student theStudent = studentRepository.findByUsername(userName);
         return theStudent;
     }
 
@@ -95,9 +90,11 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(theStudent);
     }
 
+    /*
     @Override
     @Transactional
-    public void deleteById(int theId) {
-        studentRepository.deleteById(theId);
+    public void deleteById(String userName) {
+        studentRepository.deleteById(userName);
     }
+    */
 }

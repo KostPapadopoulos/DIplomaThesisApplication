@@ -40,8 +40,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public Professor retrieveProfile(User theUser) {
-        Professor theProfessor = professorDAO.findByUser(theUser);
+    public Professor retrieveProfile(String userName) {
+        Professor theProfessor = professorDAO.findByUsername(userName);
         return theProfessor;
     }
 
@@ -53,15 +53,15 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Subject> listProfessorSubjects(User theUser){
-        Professor theProfessor = professorDAO.findByUser(theUser);
+    public List<Subject> listProfessorSubjects(String userName){
+        Professor theProfessor = professorDAO.findByUsername(userName);
         return theProfessor.getMySubjects();
     }
 
     @Override
     @Transactional
-    public void addSubject(User theUser, Subject newSubject) {
-        Professor theProfessor = professorDAO.findByUser(theUser);
+    public void addSubject(String userName, Subject newSubject) {
+        Professor theProfessor = professorDAO.findByUsername(userName);
         subjectDAO.save(newSubject);
         theProfessor.getMySubjects().add(newSubject);
 
@@ -76,8 +76,8 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Thesis> listProfessorThesis(User theUser) {
-        Professor theProfessor = professorDAO.findByUser(theUser);
+    public List<Thesis> listProfessorThesis(String userName) {
+        Professor theProfessor = professorDAO.findByUsername(userName);
         return theProfessor.getMyThesis();
     }
 

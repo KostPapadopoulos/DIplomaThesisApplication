@@ -8,17 +8,17 @@ import java.util.List;
 
 public interface ProfessorService {
 
-    public Professor retrieveProfile(User theUser);
+    public Professor retrieveProfile(String userName);
 
     public void saveProfile(Professor theprofessor);
 
-    public List<Subject> listProfessorSubjects(User theUser);
+    public List<Subject> listProfessorSubjects(String userName);
 
-    public void addSubject(User theUser, Subject newSubject);
+    public void addSubject(String userName, Subject newSubject);
 
     public List<Application> listApplications(String str);
 
-    public List<Thesis> listProfessorThesis(User theUser);
+    public List<Thesis> listProfessorThesis(String userName);
 
     public void assignSubject(String str, String in, int th1, int th2);
 
