@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS `APPLICATION`;
 
 CREATE TABLE `APPLICATION` (
     ap_id int(10) PRIMARY KEY AUTO_INCREMENT,
-    subject_id INT(50) DEFAULT NULL,
-    student_id INT(50) DEFAULT NULL,
-    FOREIGN KEY (student_id) REFERENCES `STUDENT`(st_id),
+    subject_id INT(50) NOT NULL,
+    st_username VARCHAR(50) NOT NULL,
+    FOREIGN KEY (st_username) REFERENCES `STUDENT`(username),
     FOREIGN KEY (subject_id) REFERENCES `SUBJECT`(sub_id)
 );

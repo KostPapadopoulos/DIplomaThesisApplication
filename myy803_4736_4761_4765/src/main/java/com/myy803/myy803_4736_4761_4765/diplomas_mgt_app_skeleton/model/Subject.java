@@ -26,10 +26,10 @@ public class Subject {
     private boolean sub_availability;
 
     @ManyToOne
-    @JoinColumn(name = "professor_id", referencedColumnName = "pr_id")
+    @JoinColumn(name = "pr_username", referencedColumnName = "username")
     private Professor professor;
 
-    @Column(name = "applications")
+    @Transient
     private ArrayList<Application> applicationList;
 
     public Subject() {}

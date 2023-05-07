@@ -1,6 +1,6 @@
 --CREATE DATABASE IF NOT EXISTS `diploma_management_app_db`;
 
---USE `diploma_management_app_db`;
+USE `diploma_management_app_db`;
 
 DROP TABLE IF EXISTS `USER_`;
 

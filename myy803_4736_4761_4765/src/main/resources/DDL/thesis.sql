@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS `THESIS`;
 
 CREATE TABLE `THESIS` (
     th_id INT(10) PRIMARY KEY AUTO_INCREMENT,
-    student_id INT(50) DEFAULT NULL,
-    subject_id INT(50) DEFAULT NULL,
-    FOREIGN KEY (student_id) REFERENCES STUDENT(st_id),
+    st_username VARCHAR(50) NOT NULL,
+    subject_id INT(50) NOT NULL,
+    FOREIGN KEY (st_username) REFERENCES STUDENT(username),
     FOREIGN KEY (subject_id) REFERENCES SUBJECT(sub_id)
 );

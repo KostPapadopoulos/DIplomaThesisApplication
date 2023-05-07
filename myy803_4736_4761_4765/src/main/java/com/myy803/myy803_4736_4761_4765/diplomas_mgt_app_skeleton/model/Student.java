@@ -12,16 +12,14 @@ import java.util.ArrayList;
 @Entity
 @Table (name = "STUDENT")
 public class Student {
+
     @Id
-    @Column (name = "st_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int st_id;
+    @Column(name = "username")
+    private String username;
 
     @Column (name = "email")
     private String email;
 
-    @Column(name = "username")
-    private String username;
 
     @Column (name = "full_name")
     private String fullName;
@@ -32,9 +30,6 @@ public class Student {
     @Column (name = "current_avg_grade")
     private float currentAvgGrade;
 
-    @Column (name = "password")
-    private String password;
-
     @Column(name = "number_of_courses")
     private int numberOfRemCourses;
 
@@ -43,22 +38,23 @@ public class Student {
 
     public Student() {}
 
-    public Student(String username, String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses, String password){
+    public Student(String username){
+        this.username = username;
+    }
+
+    public Student(String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses){
+        this.fullName = fullName;
+        this.yearOfStudies = yearOfStudies;
+        this.currentAvgGrade = currentAvgGrade;
+        this.numberOfRemCourses = numberOfRemCourses;
+        this.applications = new ArrayList<>();
+    }
+    public Student(String username, String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses) {
         this.username = username;
         this.fullName = fullName;
         this.yearOfStudies = yearOfStudies;
         this.currentAvgGrade = currentAvgGrade;
         this.numberOfRemCourses = numberOfRemCourses;
-        this.password = password;
-        this.applications = new ArrayList<>();
-    }
-    public Student(int st_id, String fullName,int yearOfStudies, float currentAvgGrade, int numberOfRemCourses, String password) {
-        this.st_id = st_id;
-        this.fullName = fullName;
-        this.yearOfStudies = yearOfStudies;
-        this.currentAvgGrade = currentAvgGrade;
-        this.numberOfRemCourses = numberOfRemCourses;
-        this.password = password;
         this.applications = new ArrayList<>();
     }
 }

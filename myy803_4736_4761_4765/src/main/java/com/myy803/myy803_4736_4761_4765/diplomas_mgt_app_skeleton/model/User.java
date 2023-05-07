@@ -21,14 +21,14 @@ public class User implements UserDetails {
 
     @Id
     @Column (name = "us_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int us_id;
 
     @Column (name = "username", unique = true)
     private String username;
 
     @Column (name = "password_")
-    private String password_;
+    private String password;
 
     @Enumerated (EnumType.STRING)
     @Column (name = "role_")
@@ -38,14 +38,14 @@ public class User implements UserDetails {
 
     public User(String userName, String password, Role role) {
         this.username = userName;
-        this.password_ = password;
+        this.password = password;
         this.role = role;
     }
 
     public User(int us_id, String userName, String password, Role role){
         this.us_id = us_id;
         this.username = userName;
-        this.password_ = password;
+        this.password = password;
         this.role = role;
     }
 
@@ -64,11 +64,6 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority((role.name()));
         return Collections.singletonList(authority);
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password_;
     }
 
     @Override
@@ -99,7 +94,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setPassword(String encodedPassword) {
-        this.password_ = encodedPassword;
-    }
 }

@@ -13,20 +13,14 @@ import java.util.List;
 @Table (name = "PROFESSOR")
 public class Professor {
     @Id
-    @Column(name = "pr_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pr_id;
-
-    @OneToOne
-    @JoinColumn(name = "us_id")
-    private User user;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "full_name")
     private String fullName;
 
     @Column(name = "specialty")
     private String specialty;
-
 
     @Transient
     private List<Subject> mySubjects;
@@ -37,18 +31,22 @@ public class Professor {
 
     public Professor() {}
 
-    public Professor(String username, String fullName, String specialty, User theUser) {
-        this.fullName = fullName;
-        this.specialty = specialty;
-        this.user = theUser;
+    public Professor(String username){
+        this.username = username;
         this.mySubjects = new ArrayList<>();
         this.myThesis = new ArrayList<>();
     }
-    public Professor(int pr_id, String username, String fullName, String specialty, User theUser) {
-        this.pr_id = pr_id;
+
+    public Professor(String username, String fullName, String specialty) {
+        this.username = username;
         this.fullName = fullName;
         this.specialty = specialty;
-        this.user = theUser;
+        this.mySubjects = new ArrayList<>();
+        this.myThesis = new ArrayList<>();
+    }
+    public Professor( String fullName, String specialty) {
+        this.fullName = fullName;
+        this.specialty = specialty;
         this.mySubjects = new ArrayList<>();
         this.myThesis = new ArrayList<>();
     }

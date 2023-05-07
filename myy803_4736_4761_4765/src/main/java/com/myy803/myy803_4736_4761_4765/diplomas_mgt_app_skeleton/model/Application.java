@@ -21,7 +21,7 @@ public class Application {
     private Subject subject;
 
     @OneToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "st_id")
+    @JoinColumn(name = "st_username", referencedColumnName = "username")
     private Student student;
 
     public Application() {}
