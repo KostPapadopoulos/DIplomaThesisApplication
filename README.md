@@ -1,1 +1,1 @@
-# DIplomaThesisApplication
+# DiplomaThesisApplication
