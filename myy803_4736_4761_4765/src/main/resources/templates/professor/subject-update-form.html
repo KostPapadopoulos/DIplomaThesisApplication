@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <title>Update Subject</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Subject</h3>
+  <hr>
+
+  <p class="h4 mb-4">Save Subject </p>
+
+  <form th:action="@{/professor/save-subject}"
+        th:object="${subject}" method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{sub_id}" />
+
+    <input type="hidden" name="professor.username" th:field="*{professor.username}" />
+
+    <input type="text" th:field="*{title}"
+           class="form-control mb-4 col-4" placeholder="Subject Title">
+
+    <input type="text" th:field="*{objectives}"
+           class="form-control mb-4 col-4" placeholder="Subject Objective">
+
+    <input type="text" th:field="*{sub_availability}"
+           class="form-control mb-4 col-4" placeholder="Subject Availability">
+
+    <button type="submit" class="btn btn-info col-2">Save</button>
+
+  </form>
+
+  <hr>
+  <a th:href="@{/professor/list-subject}">Back to Subject List</a>
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+

@@ -10,6 +10,67 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   <title>Subject List</title>
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+
+    h3 {
+      color: #007bff;
+      font-family: Helvetica, sans-serif;
+    }
+
+    hr {
+      border-top: 1px solid #007bff;
+    }
+
+    .table {
+      margin-top: 20px;
+    }
+
+    .table th {
+      background-color: #343a40;
+      color: #fff;
+    }
+
+    .btn-apply {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-family: Helvetica, sans-serif;
+    }
+
+    .btn-apply:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .btn-view-details {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      font-family: Helvetica, sans-serif;
+    }
+
+    .btn-view-details:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+  </style>
 </head>
 
 <body>
@@ -17,6 +78,8 @@
 <div class="container">
 
   <h3>Subject List </h3>
+  <a href="/student/main-menu" class="button">Go to Main Menu</a>
+
   <hr>
 
 
@@ -28,21 +91,21 @@
     </thead>
 
     <tbody>
-    <tr th:each="tempSubject : ${Subject}">
+    <tr th:each="tempSubject : ${subjects}">
 
       <td th:text="${tempSubject.title}" />
 
       <td>
         <!-- Add "update" button/link -->
-        <a th:href="@{/student/applyToSubect(subjectid=${tempSubject.sub_id})}"
-           class="btn btn-info btn-sm">
+        <a th:href="@{/student/applyToSubject(subjectid=${tempSubject.sub_id})}"
+           class="btn-apply"
           onclick="if (!(confirm('Are you sure you want to apply to this subject?'))) return false">
           Apply
         </a>
 
         <!-- Add "delete" button/link -->
         <a th:href="@{/student/subjectDetails(subjectid=${tempSubject.sub_id})}"
-           class="btn btn-danger btn-sm">
+           class="btn-view-details btn-view-details">
           View Details
         </a>
 

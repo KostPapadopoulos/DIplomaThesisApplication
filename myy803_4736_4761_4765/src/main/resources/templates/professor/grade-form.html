@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Form</title>
+  <style>
+  body {
+      font-family: Helvetica, Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0069d9;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Grade Form</h2>
+  <form th:action="@{/professor/save-grades}" method="post">
+    <input type="hidden" name="thesisID" th:value="${thesisID}" />
+
+    <div class="form-group">
+      <label for="implementationGrade">Implementation Grade:</label>
+      <input type="number" id="implementationGrade" name="implementationGrade" step="0.01" required />
+    </div>
+
+    <div class="form-group">
+      <label for="presentationGrade">Presentation Grade:</label>
+      <input type="number" id="presentationGrade" name="presentationGrade" step="0.01" required />
+    </div>
+
+    <div class="form-group">
+      <label for="reportGrade">Report Grade:</label>
+      <input type="number" id="reportGrade" name="reportGrade" step="0.01" required />
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+</body>
+</html>

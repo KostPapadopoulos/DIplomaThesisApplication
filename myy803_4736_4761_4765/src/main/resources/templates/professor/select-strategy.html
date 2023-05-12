@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Strategy Selection</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 10px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+
+    .fields {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .fields input {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<h1>Select a Strategy</h1>
+
+
+<form action="#" th:action="@{/professor/assign}" method="post">
+    <input type="hidden" name="subjectId" th:value="${subject.sub_id}" />
+
+    <button type="submit" class="button" name="choice" value="ThresholdStrategy">Threshold Strategy</button>
+    <button type="submit" class="button" name="choice" value="BestAverageGrade">Best Average Grade</button>
+    <button type="submit" class="button" name="choice" value="FewestCoursesStrategy">Fewest Courses Strategy</button>
+
+    <div class="fields" th:if="${choice == 'Threshold Strategy'}">
+        <input type="number" step="0.1" name="thresholdGrade" placeholder="Threshold Grade" required><br>
+        <input type="number" step="1.0" name="thresholdCourses" placeholder="Threshold Courses" required><br>
+    </div>
+</form>
+<!--
+<script th:inline="javascript">
+    var fields = document.querySelector('.fields');
+    var buttons = document.querySelectorAll('.button');
+
+    buttons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        fields.style.display = 'none';
+      });
+    });
+  </script>
+-->
+</body>
+
+</html>

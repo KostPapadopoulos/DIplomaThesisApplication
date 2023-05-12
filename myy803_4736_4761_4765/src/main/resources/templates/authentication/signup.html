@@ -10,28 +10,93 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   <title>Register</title>
+  <style>
+    .container {
+      margin-top: 50px;
+    }
+    form {
+      margin: auto;
+      max-width: 300px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #f5f5f5;
+    }
+    h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-family: Helvetica, sans-serif;
+    }
+    input[type="text"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .custom-button {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .custom-button-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .custom-button-primary:hover {
+      background-color: #0069d9;
+      border-color: #0062cc;
+    }
+
+    .custom-button-info {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+    }
+
+    .custom-button-info:hover {
+      background-color: #138496;
+      border-color: #117a8b;
+    }
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+    .success-message {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 
-
 <body>
-
 <div class="container">
-
-  <form
-          action="#"
-          th:action="@{/save}" th:object="${user}" method="post">
+  <form action="#" th:action="@{/save}" th:object="${user}" method="post">
     <h3>Registration</h3>
-    <input type="text" th:field="*{username}" placeholder="User Name" /> <br/><br/>
-    <input type="password" th:field="*{password}" placeholder="Password" /> <br/><br/>
+    <input type="text" th:field="*{username}" placeholder="Username" /><br/><br/>
+    <input type="password" th:field="*{password}" placeholder="Password" /><br/><br/>
     <select th:field="*{role}" required>
       <option value="">Select</option>
       <option value="STUDENT">STUDENT</option>
       <option value="PROFESSOR">PROFESSOR</option>
-    </select> <br/><br/>
+    </select><br/><br/>
 
-    <button type="submit" class="btn btn-info col-2">Register</button>
-
-    <a th:href="@{/login}" class="btn btn-primary col-2"> Login</a>
+    <button type="submit" class="custom-button custom-button-info">Register</button>
+    <br />
+    <a th:href="@{/login}" class="custom-button custom-button-primary"> Login</a>
 
     <div th:if="${param.error}"><p>Registration Error.</p></div> <br/>
 
