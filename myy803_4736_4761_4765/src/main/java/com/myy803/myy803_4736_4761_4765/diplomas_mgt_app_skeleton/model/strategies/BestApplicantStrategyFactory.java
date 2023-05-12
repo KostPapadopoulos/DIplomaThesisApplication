@@ -9,11 +9,11 @@ public class BestApplicantStrategyFactory {
                 BestAvgGradeStrategy strategy = new BestAvgGradeStrategy();
                 return strategy;
             }
-            case "LeastRemainingCourses" -> {
+            case "FewestCoursesStrategy" -> {
                 FewestCoursesStrategy strategy = new FewestCoursesStrategy();
                 return strategy;
             }
-            case "Threshold Strategy" -> {
+            case "ThresholdStrategy" -> {
                 ThresholdStrategy strategy = new ThresholdStrategy(thresholdGrade, thresholdCourses);
                 return strategy;
             }

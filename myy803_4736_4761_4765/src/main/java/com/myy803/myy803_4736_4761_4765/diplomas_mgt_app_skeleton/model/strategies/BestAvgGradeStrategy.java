@@ -10,22 +10,23 @@ public class BestAvgGradeStrategy extends TemplateStrategyAlgorithm {
     public BestAvgGradeStrategy() {}
 
     @Override
-    public int compareApplications(Application app1, Application app2){
+    public String compareApplications(Application app1, Application app2){
         Student firstStudent = app1.getStudent();
         Student secondStudent = app2.getStudent();
         if (firstStudent.getCurrentAvgGrade() < secondStudent.getCurrentAvgGrade()){
-            return secondStudent.getSt_id();
+            return secondStudent.getUsername();
         }
         else if (firstStudent.getCurrentAvgGrade() > secondStudent.getCurrentAvgGrade()){
-            return firstStudent.getSt_id();
+            return firstStudent.getUsername();
         }
         else {
-            ArrayList<Integer> tempList = new ArrayList<Integer>();
-            tempList.add(firstStudent.getSt_id());
-            tempList.add(secondStudent.getSt_id());
+            ArrayList<String> tempList = new ArrayList<String>();
+            tempList.add(firstStudent.getUsername());
+            tempList.add(secondStudent.getUsername());
             Random random = new Random();
-            Integer result = tempList.get(random.nextInt(tempList.size()));
+            String result = tempList.get(random.nextInt(tempList.size()));
             return result;
+
         }
     }
 

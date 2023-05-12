@@ -27,7 +27,7 @@ public class ThresholdStrategy implements BestApplicantStrategy{
             }
         }
         Random rand = new Random();
-        Student resultId = tempList.get(rand.nextInt(tempList.size()));
-        return resultId;
+        Student resultStudent = tempList.get(rand.nextInt(tempList.size()));
+        return resultStudent;
     }
 }
