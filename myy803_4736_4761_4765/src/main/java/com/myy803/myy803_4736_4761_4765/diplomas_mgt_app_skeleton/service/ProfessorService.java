@@ -12,13 +12,13 @@ public interface ProfessorService {
 
     public void saveProfile(Professor theprofessor);
 
-    public List<Subject> listProfessorSubjects(String userName);
+    public List<Subject> listProfessorSubjects(Professor theProfessor);
 
     public void addSubject(String userName, Subject newSubject);
 
     public List<Application> listApplications(String str);
 
-    public List<Thesis> listProfessorThesis(String userName);
+    public List<Thesis> listProfessorThesis(Professor theProfessor);
 
     public void assignSubject(String str, String in, int th1, int th2);
 

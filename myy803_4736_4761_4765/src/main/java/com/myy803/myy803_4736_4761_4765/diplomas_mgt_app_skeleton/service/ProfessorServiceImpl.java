@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,9 +54,18 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Subject> listProfessorSubjects(String userName){
-        Professor theProfessor = professorDAO.findByUsername(userName);
-        return theProfessor.getMySubjects();
+    public List<Subject> listProfessorSubjects(Professor theProfessor){
+        List<Subject> allSubjects = subjectDAO.findAll();
+        List<Subject> selectedSubjects = new ArrayList<>();
+        for (Subject s : allSubjects){
+            if (s.getProfessor() == null){
+                continue;
+            }
+            else if (s.getProfessor().getUsername().equals(theProfessor.getUsername())){
+                selectedSubjects.add(s);
+            }
+        }
+        return selectedSubjects;
     }
 
     @Override
@@ -76,9 +86,27 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public List<Thesis> listProfessorThesis(String userName) {
-        Professor theProfessor = professorDAO.findByUsername(userName);
-        return theProfessor.getMyThesis();
+    public List<Thesis> listProfessorThesis(Professor theProfessor) {
+        List<Subject> mySubjects = new ArrayList<>();
+        List<Subject> allSubjects = subjectDAO.findAll();
+        for (Subject s : allSubjects){
+            if (s.getProfessor().getUsername().equals(theProfessor.getUsername())){
+                mySubjects.add(s);
+            }
+        }
+        List<Thesis> allThesis = thesisDAO.findAll();
+        List<Thesis> myThesis = new ArrayList<>();
+        for (Subject s: mySubjects){
+            if(!s.isSub_availability()){
+                for (Thesis t : allThesis){
+                    if (t.getSubject().getSub_id() == s.getSub_id()){
+                        myThesis.add(t);
+                    }
+                }
+
+            }
+        }
+        return myThesis;
     }
 
     @Override
@@ -86,8 +114,15 @@ public class ProfessorServiceImpl implements ProfessorService {
     public void assignSubject(String subjectName, String strategyName, int thresholdG, int thresholdC) {
         Subject theSubject = subjectDAO.findByTitle(subjectName);
         BestApplicantStrategy theStrategy = BestApplicantStrategyFactory.createStrategy(strategyName,thresholdG, thresholdC);
-        Student theStudent = theStrategy.findBestApplicant(theSubject.getApplicationList());
-        Thesis newThesis = new Thesis(theSubject.getSub_id(),theStudent,theSubject);
+        List<Application> allApplications = applicationDAO.findAll();
+        List<Application> subApplications = new ArrayList<>();
+        for (Application a : allApplications){
+            if (a.getSubject().getSub_id() == theSubject.getSub_id()){
+                subApplications.add(a);
+            }
+        }
+        Student theStudent = theStrategy.findBestApplicant(subApplications);
+        Thesis newThesis = new Thesis(theStudent,theSubject);
         thesisDAO.save(newThesis);
         theSubject.setSub_availability(false);
         subjectDAO.save(theSubject);

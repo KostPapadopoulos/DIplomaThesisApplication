@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -81,7 +82,8 @@ public class StudentServiceImpl implements StudentService {
         Subject theSubject = subjectDAO.findByTitle(subjectName);
         Application newApplication = new Application(theSubject, theStudent);
         applicationDAO.save(newApplication);
-        theStudent.getApplications().add(newApplication);
+        //theStudent.getApplications().add(newApplication);
+
     }
 
     @Override
