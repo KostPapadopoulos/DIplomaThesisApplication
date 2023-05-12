@@ -33,7 +33,7 @@ public class Student {
     @Column(name = "number_of_courses")
     private int numberOfRemCourses;
 
-    @Column(name = "applications")
+    @Transient
     private ArrayList<Application> applications;
 
     public Student() {}

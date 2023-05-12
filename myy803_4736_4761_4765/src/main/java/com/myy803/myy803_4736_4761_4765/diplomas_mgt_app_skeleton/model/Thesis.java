@@ -25,6 +25,9 @@ public class Thesis {
     @JoinColumn(name = "st_username", referencedColumnName = "username")
     private Student student;
 
+    @Column(name = "grade")
+    private float grade;
+
     public Thesis() {}
 
     public Thesis(Student student, Subject subject){
@@ -32,9 +35,10 @@ public class Thesis {
         this.subject = subject;
     }
 
-    public Thesis(int th_id, Student student, Subject subject) {
+    public Thesis(int th_id, Student student, Subject subject, float theGrade) {
         this.th_id = th_id;
         this.student = student;
         this.subject = subject;
+        this.grade = theGrade;
     }
 }
