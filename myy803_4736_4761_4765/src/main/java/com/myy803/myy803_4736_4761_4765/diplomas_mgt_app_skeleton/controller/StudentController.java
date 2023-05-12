@@ -3,19 +3,16 @@ package com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Application;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
-import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.User;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 @Controller
@@ -57,7 +54,7 @@ public class StudentController {
     public String listSubjects(Model theModel) {
         List<Subject> allSubjects = subjectService.findAll();
         theModel.addAttribute("subjects", allSubjects);
-        return "/student/subject-list";
+        return "student/subject-list";
     }
 
     @RequestMapping("/applications-list")
@@ -77,7 +74,7 @@ public class StudentController {
         return "student/student-form";
     }
 
-    @RequestMapping("/applyToSubect")
+    @RequestMapping("/applyToSubject")
     public String applyToSubject(@RequestParam("subjectid") int sub_id, Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Student theStudent = studentService.retrieveProfile(auth.getName());
@@ -89,7 +86,7 @@ public class StudentController {
     @RequestMapping("/subjectDetails")
     public String viewSubjectDetails(@RequestParam("subjectid") int sub_id, Model theModel){
         Subject theSubject = subjectService.findById(sub_id);
-        theModel.addAttribute("Subject", theSubject);
-        return "student/subject-details";
+        theModel.addAttribute("subject", theSubject);
+        return "student/view-details";
     }
 }

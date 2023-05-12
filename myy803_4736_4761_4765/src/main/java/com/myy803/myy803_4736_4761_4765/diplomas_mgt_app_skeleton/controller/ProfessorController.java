@@ -1,20 +1,20 @@
 package com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller;
 
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.*;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ApplicationService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ProfessorService;
-import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserService;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ThesisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,9 +28,17 @@ public class ProfessorController {
     @Autowired
     private final SubjectService subjectService;
 
-    public ProfessorController(ProfessorService thePService, SubjectService theSuService){
+    @Autowired
+    private final ThesisService thesisService;
+
+    @Autowired
+    private final ApplicationService applicationService;
+
+    public ProfessorController(ProfessorService thePService, SubjectService theSuService, ThesisService theService, ApplicationService appService, ApplicationService applicationService){
         this.professorService = thePService;
         this.subjectService = theSuService;
+        this.thesisService = theService;
+        this.applicationService = applicationService;
     }
 
 
@@ -60,30 +68,24 @@ public class ProfessorController {
         theModel.addAttribute("professor", theProfessor);
         return "professor/professor-form";
     }
-    @RequestMapping("/list-subject")
+    @RequestMapping("/subject-list")
     public String listProfessorSubjects(Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Professor theProfessor = professorService.retrieveProfile(auth.getName());
         theModel.addAttribute("professor", theProfessor);
-        List<Subject> allSubjects = subjectService.findAll();
-        for (Subject s : allSubjects){
-            if (s.getProfessor().getUsername().equals(theProfessor.getUsername())){
-                theProfessor.getMySubjects().add(s);
-            }
-        }
-        List<Subject> mySubjects = theProfessor.getMySubjects();
-        theModel.addAttribute("subjects", mySubjects);
+        List<Subject> selectedSubjects = professorService.listProfessorSubjects(theProfessor);
+        theModel.addAttribute("subjects", selectedSubjects);
         return "professor/subject-list";
     }
 
-    @RequestMapping("/list-thesis")
+    @RequestMapping("/thesis-list")
     public String listProfessorThesis(Model theModel){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Professor theProfessor = professorService.retrieveProfile(auth.getName());
         theModel.addAttribute("professor", theProfessor);
-        List<Thesis> myThesis = theProfessor.getMyThesis();
-        theModel.addAttribute("subjects", myThesis);
-        return "professor/subject-list";
+        List<Thesis> myThesis = professorService.listProfessorThesis(theProfessor);
+        theModel.addAttribute("thesis", myThesis);
+        return "professor/thesis-list";
     }
 
     @RequestMapping("/showFormForAdd")
@@ -92,9 +94,6 @@ public class ProfessorController {
         Professor theProfessor = professorService.retrieveProfile(auth.getName());
         theModel.addAttribute("professor", theProfessor);
         Subject newSubject = new Subject();
-
-        // TODO H forma den gemizei to pr username gia kapoio logo kai meta den mporei na ginei accessed
-
         theModel.addAttribute("subject", newSubject);
         return "professor/subject-add-form";
     }
@@ -102,45 +101,46 @@ public class ProfessorController {
     @RequestMapping("/showFormForUpdateSub")
     public String showSubjectUpdateForm(@RequestParam("subjectId") int theId,
                                         Model theModel){
-        List<Subject> theSubjects = (List<Subject>) theModel.getAttribute("subjects");
-        theSubjects.size();
-
         Subject theSubject = subjectService.findById(theId);
-
-
         theModel.addAttribute("subject", theSubject);
-
-
         return "professor/subject-update-form";
     }
     @RequestMapping("/save-subject")
     public String addSubject(@ModelAttribute("subject") Subject theSubject, Model theModel){
         System.out.println(theSubject.getTitle());
         subjectService.save(theSubject);
-        System.out.println("Saved ADERFE ");
-
         return "redirect:/professor/main-menu";
     }
 
-    @RequestMapping("/applications-list")
-    public String listApplications(@RequestParam("subjectid")int subId, Model theModel){
+    @RequestMapping("/application-list")
+    public String listApplications(@RequestParam("subjectId")int subId, Model theModel){
         Subject theSubject = subjectService.findById(subId);
-        List<Application> subApplications = theSubject.getApplicationList();
-        theModel.addAttribute("applications-list", subApplications);
+        List<Application> subApplications = applicationService.getSubApplications(theSubject.getSub_id());
+        String choice = "";
+        theModel.addAttribute("applicationlist", subApplications);
+        theModel.addAttribute("subjectId", subId);
+        theModel.addAttribute("choice", choice);
+        return "professor/application-list";
+    }
 
-        return "professor/applications-list";
+    @RequestMapping("/select-strategy")
+    public String selectStrategy(@RequestParam("subjectId") int sub_ID, Model theModel){
+        Subject theSubject = subjectService.findById(sub_ID);
+        theModel.addAttribute("subject", theSubject);
+        return "/professor/select-strategy";
     }
 
     @RequestMapping("/assign")
-    public String assignSubject(@RequestParam("subjectid")int subId,@RequestParam(value = "choice")String choice,
+    public String assignSubject(@RequestParam("subjectId")int subId,@RequestParam(value = "choice")String choice,
                                 @RequestParam(value = "thresholdGrade",required = false, defaultValue = "-1") String thresholdGrade,
-                                @RequestParam(value = "thresholdCourses", required = false, defaultValue = "-1") String thresholdCourses,
-                                Model theModel){
+                                @RequestParam(value = "thresholdCourses", required = false, defaultValue = "-1") String thresholdCourses){
         Subject theSubject = subjectService.findById(subId);
         int thresholdGradeInt = Integer.parseInt(thresholdGrade);
         int thresholdCoursesInt = Integer.parseInt(thresholdCourses);
         professorService.assignSubject(theSubject.getTitle(),choice,thresholdGradeInt,thresholdCoursesInt);
         return "/professor/subject-list";
+
+        //TODO Epishs den leitourgei opws prepei to threshlod strategy
     }
 
     @RequestMapping("/delete-subject")
@@ -148,8 +148,23 @@ public class ProfessorController {
 
         subjectService.deleteById(theId);
 
-        return "redirect:/professor/subject-list";
+        return "redirect:/professor/list-subject";
 
     }
 
+    @RequestMapping("/grade-form")
+    public String setGrade(@RequestParam("thesisID") int th_ID, Model theModel){
+        theModel.addAttribute("thesisID", th_ID);
+        return "professor/grade-form";
+    }
+
+    @RequestMapping("/save-grades")
+    public String saveGrade(@RequestParam("thesisID") int th_ID,
+                           @RequestParam("implementationGrade") float implGrade,
+                           @RequestParam("presentationGrade") float presGrade,
+                           @RequestParam("reportGrade") float reportGrade){
+
+        thesisService.setGrade(th_ID,implGrade,presGrade,reportGrade);
+        return "redirect:/professor/main-menu";
+    }
 }
