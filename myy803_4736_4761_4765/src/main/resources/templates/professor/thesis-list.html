@@ -10,6 +10,49 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
   <title>My Thesis</title>
+  <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        hr {
+            margin: 50px 0;
+            border-color: #fff;
+        }
+
+        h4 {
+            margin-top: auto;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,6 +62,7 @@
   <h3>My Thesis</h3>
   <hr>
 
+  <a th:href="@{/professor/main-menu}" class="btn">Back to Main Menu</a>
 
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
@@ -39,7 +83,7 @@
       <td>
         <!-- Add "update" button/link -->
         <a th:href="@{/professor/grade-form(thesisID=${tempThesis.th_id})}"
-            class="btn btn-info btn-sm">
+            class="btn">
             Set Grade
         </a>
 

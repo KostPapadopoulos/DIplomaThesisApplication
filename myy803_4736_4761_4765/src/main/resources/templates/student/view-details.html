@@ -3,66 +3,94 @@
 <head>
   <title>Subject Information</title>
   <style>
-      table {
-          border-collapse: collapse;
-          width: 100%;
-      }
+    body {
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 50px;
+      text-align: center;
+      min-height: 100vh;
+      font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    }
 
-      th, td {
-          padding: 8px;
-          text-align: left;
-          border-bottom: 1px solid #ddd;
-      }
+    h1 {
+      margin-bottom: 20px;
+      margin-top : 40px;
+    }
 
-      tr:nth-child(even) {
-          background-color: #f2f2f2;
-      }
+    hr {
+      margin: 50px 0;
+      border-color: #fff;
+    }
 
-      .availability-true {
-          color: green;
-          font-weight: bold;
-      }
+    table {
+      margin-top : 100px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-      .availability-false {
-          color: red;
-          font-weight: bold;
-      }
-      .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 10px;
-        }
+    th, td {
+      padding: 10px;
+      border: 1px solid #fff;
+    }
 
-        .button:hover {
-            background-color: #45a049;
-        }
-    </style>
+    th {
+      background-color: #444;
+      color: #fff;
+    }
+
+    td {
+      background-color: #222;
+    }
+
+    .button-container {
+      margin-top: 30px;
+
+    }
+
+    .btn {
+      background-color: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #fff;
+      color: #000;
+    }
+  </style>
 </head>
 <body>
 <h1>Subject Information</h1>
-<a href="/student/main-menu" class="button">Go to Main Menu</a>
-<a href="/student/list-subject" class="button">Go to Subject List</a>
+<br>
+<br>
+<br>
+<br><br>
 
 <table>
   <tr>
-    <th>Title:</th>
+    <th>Title</th>
     <td th:text="${subject.title}"></td>
   </tr>
   <tr>
-    <th>Objectives:</th>
+    <th>Objectives</th>
     <td th:text="${subject.objectives}"></td>
   </tr>
   <tr>
-    <th>Availability:</th>
+    <th>Availability</th>
     <td th:text="${subject.sub_availability ? 'Available' : 'Not Available'}"></td>
   </tr>
 </table>
+<div class="button-container">
+  <a href="/student/main-menu" class="btn">Return to Main Menu</a>
+  <a href="/student/subject-list" class="btn">Return to Subject List</a>
+</div>
 </body>
 </html>

@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Main Menu</title>
+    <title>Error</title>
     <style>
         body {
             background-color: #000;
-            color: #fff;
+            color: #FF0000;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 50px;
             text-align: center;
             min-height: 100vh;
@@ -49,16 +47,12 @@
         }
     </style>
 </head>
-
 <body>
-<div class="container">
-    <h2>Welcome to Professor Main Menu</h2>
-    <a th:href="@{/professor/showFormForEdit}" class="btn">Edit my info</a>
-    <a th:href="@{/professor/subject-list}" class="btn">View Subjects</a>
-    <a th:href="@{/professor/thesis-list}" class="btn">View Thesis</a>
-    <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
-    <hr>
-    <h4>Logged as: <span sec:authentication="name"></span></h4>
-</div>
+<h1>ERROR</h1>
+<p th:text="${errorMessage}"></p>
 </body>
+
+<a href="/student/main-menu" class="btn">Go to Main Menu</a>
+
+
 </html>

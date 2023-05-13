@@ -4,68 +4,85 @@
 <head>
     <title>Strategy Selection</title>
     <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 20px;
-    }
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-      text-decoration: none;
-      font-size: 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      margin: 10px;
-    }
+        h2 {
+            margin-bottom: 30px;
+        }
 
-    .button:hover {
-      background-color: #45a049;
-    }
+        hr {
+            margin: 50px 0;
+            border-color: #fff;
+        }
 
-    .fields {
-      margin-top: 20px;
-      display: none;
-    }
+        h4 {
+            margin-top: auto;
+            margin-bottom: 30px;
+        }
 
-    .fields input {
-      margin-bottom: 10px;
-    }
-  </style>
+            .btn-strategies {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 20px 30px;
+            border-radius: 30px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+            font-size : 20px;
+
+        }
+        .btn-strategies:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .btn {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    </style>
 </head>
 
 <body>
 <h1>Select a Strategy</h1>
 
 
-<form action="#" th:action="@{/professor/assign}" method="post">
+<form action="#" th:action="@{/professor/threshold-values}" method="post">
     <input type="hidden" name="subjectId" th:value="${subject.sub_id}" />
 
-    <button type="submit" class="button" name="choice" value="ThresholdStrategy">Threshold Strategy</button>
-    <button type="submit" class="button" name="choice" value="BestAverageGrade">Best Average Grade</button>
-    <button type="submit" class="button" name="choice" value="FewestCoursesStrategy">Fewest Courses Strategy</button>
-
-    <div class="fields" th:if="${choice == 'Threshold Strategy'}">
-        <input type="number" step="0.1" name="thresholdGrade" placeholder="Threshold Grade" required><br>
-        <input type="number" step="1.0" name="thresholdCourses" placeholder="Threshold Courses" required><br>
-    </div>
+    <button type="submit" class="btn-strategies" name="choice" value="ThresholdStrategy">Threshold Strategy</button>
 </form>
-<!--
-<script th:inline="javascript">
-    var fields = document.querySelector('.fields');
-    var buttons = document.querySelectorAll('.button');
+<form action="#" th:action="@{/professor/assign}" method="post">
+    <input type="hidden" name="subjectId" th:value="${subject.sub_id}" />
+    <button type="submit" class="btn-strategies" name="choice" value="BestAverageGrade">Best Average Grade</button>
+    <button type="submit" class="btn-strategies" name="choice" value="FewestCoursesStrategy">Fewest Courses Strategy</button>
+    <button type="submit" class="btn-strategies" name="choice" value="RandomStrategy">Random Choice Strategy</button>
+</form>
 
-    buttons.forEach(function(button) {
-      button.addEventListener('click', function() {
-        fields.style.display = 'none';
-      });
-    });
-  </script>
--->
+<a th:href="@{/professor/main-menu}" class="btn">Back to Main Menu</a>
+
+
 </body>
 
 </html>

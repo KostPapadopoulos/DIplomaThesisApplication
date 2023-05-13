@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <title>Main Menu</title>
-    <style>
+  <title>Threshold Values</title>
+  <style>
         body {
             background-color: #000;
             color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             padding: 50px;
             text-align: center;
             min-height: 100vh;
             font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
+        h1 {
+            margin-top : 40px;
+            margin-bottom: 60px;
+            font-size: 50px;
         }
 
         h2 {
@@ -41,24 +43,29 @@
             border-radius: 20px;
             margin: 10px;
             transition: background-color 0.3s ease;
+            font-size: 20px;
         }
 
         .btn:hover {
             background-color: #fff;
             color: #000;
         }
-    </style>
+  </style>
 </head>
-
 <body>
-<div class="container">
-    <h2>Welcome to Professor Main Menu</h2>
-    <a th:href="@{/professor/showFormForEdit}" class="btn">Edit my info</a>
-    <a th:href="@{/professor/subject-list}" class="btn">View Subjects</a>
-    <a th:href="@{/professor/thesis-list}" class="btn">View Thesis</a>
-    <a th:href="@{/logout}" class="btn btn-danger">Logout</a>
-    <hr>
-    <h4>Logged as: <span sec:authentication="name"></span></h4>
-</div>
+<h1>Threshold Values</h1>
+
+<form action="/professor/assign" method="post">
+  <input type="hidden" name="subjectId" th:value="${subjectId}" />
+  <input type="hidden" name="choice" th:value="${choice}" />
+
+  <label for="thresholdGrade" style="font-size: 25px">Threshold Grade:</label>
+  <input type="number" step="0.01" name="thresholdGrade" id="thresholdGrade" th:value="${thresholdGrade}" required /><br /><br />
+
+  <label for="thresholdCourses" style="font-size: 25px">Threshold Courses:</label>
+  <input type="number" step="0.01" name="thresholdCourses" id="thresholdCourses" th:value="${thresholdCourses}" required /><br /><br />
+
+  <button type="submit" class="btn">Save</button>
+</form>
 </body>
 </html>

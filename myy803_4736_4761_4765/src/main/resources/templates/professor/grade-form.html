@@ -5,81 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grade Form</title>
   <style>
-  body {
-      font-family: Helvetica, Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-    }
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
 
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 20px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    }
+        h2 {
+            margin-top: 20px;
+            margin-bottom: 50px;
+            font-size: 40px;
+        }
 
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
+        hr {
+            margin: 50px 0;
+            border-color: #fff;
+        }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+        h4 {
+            margin-top: auto;
+            margin-bottom: 30px;
+        }
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+        .btn {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+            font-size: 15px;
+        }
 
-    input[type="number"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
+        .btn-submit {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+            font-size: 20px;
+        }
 
-    button[type="submit"] {
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
 
-    button[type="submit"]:hover {
-      background-color: #0069d9;
-    }
+        .btn-submit:hover {
+            background-color: #00FF00;
+            color: #000;
+        }
+
   </style>
 </head>
 <body>
 <div class="container">
+
+
   <h2>Grade Form</h2>
   <form th:action="@{/professor/save-grades}" method="post">
     <input type="hidden" name="thesisID" th:value="${thesisID}" />
 
     <div class="form-group">
-      <label for="implementationGrade">Implementation Grade:</label>
+      <label for="implementationGrade" style="font-size: 25px">Implementation Grade:</label>
       <input type="number" id="implementationGrade" name="implementationGrade" step="0.01" required />
     </div>
 
     <div class="form-group">
-      <label for="presentationGrade">Presentation Grade:</label>
+      <label for="presentationGrade" style="font-size: 25px">Presentation Grade:</label>
       <input type="number" id="presentationGrade" name="presentationGrade" step="0.01" required />
     </div>
 
     <div class="form-group">
-      <label for="reportGrade">Report Grade:</label>
-      <input type="number" id="reportGrade" name="reportGrade" step="0.01" required />
+      <label for="reportGrade" style="font-size: 25px" >Report Grade:</label>
+      <input type="number"  id="reportGrade" name="reportGrade" step="0.01" required />
     </div>
+    <br>
+    <br>
+    <button type="submit" class="btn-submit">Submit</button>
 
-    <button type="submit">Submit</button>
   </form>
 </div>
+
+<a th:href="@{/professor/main-menu}" class="btn">Back to Main Menu</a>
+
 </body>
 </html>

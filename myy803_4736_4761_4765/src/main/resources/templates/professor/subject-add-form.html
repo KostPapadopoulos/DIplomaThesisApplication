@@ -8,9 +8,73 @@
 
   <title>Create Subject</title>
 </head>
+<style>
+        body {
+            background-color: #000;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+            text-align: center;
+            min-height: 100vh;
+            font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+        h3 {
+            margin top: 20px;
+            margin-bottom: 40px;
+            font-size: 40px;
+        }
+
+        hr {
+            margin: 50px 0;
+            border-color: #fff;
+        }
+
+        h4 {
+            margin-top: auto;
+            margin-bottom: 30px;
+        }
+
+        .btn-create {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-create:hover {
+            background-color: #00FF00;
+            color: #fff;
+        }
+        .btn {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+</style>
 <body>
 
 <h3>Create Subject</h3>
+
+
 
 <form action="/professor/save-subject" method="post">
 
@@ -19,12 +83,13 @@
   <label>Title:</label>
   <input type="text" name="title" th:value="${subject.title}" required /><br/><br/>
 
-  <label>Objectives:</label>
-  <input type="text" name="objectives" th:value="${subject.objectives}" required /><br/><br/>
+  <label >Objectives:</label>
+  <input type="text" name="objectives" th:value="${subject.objectives}" style="width: 300px; height: 35px"  required /><br/><br/>
 
-  <label>Availability:</label>
-  <input type="checkbox" name="availability" th:checked="${subject.sub_availability}" /><br/><br/>
+  <button type="submit" class="btn-create">Create</button>
+</form>
 
-  <button type="submit">Create</button>
-</form></body>
+<a th:href="@{/professor/main-menu}" class="btn">Back to Main Menu</a>
+
+</body>
 </html>
