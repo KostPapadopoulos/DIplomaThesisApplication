@@ -12,5 +12,4 @@ public interface StudentDAO  extends JpaRepository<Student, Integer> {
 
     public Student findByUsername(String userName);
 
-    //public void deleteById(@Param("id") String userName);
 }
