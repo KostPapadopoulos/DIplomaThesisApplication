@@ -106,11 +106,31 @@ public class ProfessorController {
         return "professor/subject-update-form";
     }
     @RequestMapping("/save-subject")
-    public String addSubject(@ModelAttribute("subject") Subject theSubject, Model theModel){
-        System.out.println(theSubject.getTitle());
+    public String addSubject(@ModelAttribute("subject") Subject theSubject,Model theModel){
+        theSubject.setSub_availability(true);
+        boolean sameSubject = professorService.checkForSameTitle(theSubject);
+        if (sameSubject){
+            String error = "Cannot create Subject with the same title!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
         subjectService.save(theSubject);
         return "redirect:/professor/main-menu";
     }
+
+
+    @RequestMapping("/save-updated-subject")
+    public String updateSubject(@ModelAttribute("subject") Subject theSubject, Model theModel){
+        boolean sameSubject = professorService.checkForSameTitle(theSubject);
+        if (sameSubject){
+            String error = "Cannot create Subject with the same title!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
+        subjectService.save(theSubject);
+        return "redirect:/professor/main-menu";
+    }
+
 
     @RequestMapping("/application-list")
     public String listApplications(@RequestParam("subjectId")int subId, Model theModel){
@@ -130,26 +150,52 @@ public class ProfessorController {
         return "/professor/select-strategy";
     }
 
+
+    @RequestMapping("/threshold-values")
+    public String setThresholdValues(@RequestParam("subjectId") int sub_ID,
+                                     @RequestParam("choice") String choice,
+                                     Model theModel){
+        theModel.addAttribute("subjectId", sub_ID);
+        theModel.addAttribute("choice", choice);
+        return "/professor/threshold-values";
+    }
+
     @RequestMapping("/assign")
     public String assignSubject(@RequestParam("subjectId")int subId,@RequestParam(value = "choice")String choice,
-                                @RequestParam(value = "thresholdGrade",required = false, defaultValue = "-1") String thresholdGrade,
-                                @RequestParam(value = "thresholdCourses", required = false, defaultValue = "-1") String thresholdCourses){
+                                @RequestParam(value = "thresholdGrade",required = false, defaultValue = "-1") float thresholdGrade,
+                                @RequestParam(value = "thresholdCourses", required = false, defaultValue = "-1") int thresholdCourses,
+                                Model theModel){
+        boolean duplicateAssignement = professorService.checkForSameAssignement(subId);
+        if (choice.equals("ThresholdStrategy")){
+            if (thresholdCourses < 0 || thresholdGrade > 10){
+                String error = "Invalid Threshold values!";
+                theModel.addAttribute("errorMessage", error);
+                return "/professor/error";
+            }
+        }
+        else if (duplicateAssignement){
+            String error = "Have already assigned this subject to a  student!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
         Subject theSubject = subjectService.findById(subId);
-        int thresholdGradeInt = Integer.parseInt(thresholdGrade);
-        int thresholdCoursesInt = Integer.parseInt(thresholdCourses);
-        professorService.assignSubject(theSubject.getTitle(),choice,thresholdGradeInt,thresholdCoursesInt);
-        return "/professor/subject-list";
-
-        //TODO Epishs den leitourgei opws prepei to threshlod strategy
+        System.out.println(thresholdGrade);
+        System.out.println(thresholdCourses);
+        int result = professorService.assignSubject(theSubject.getTitle(),choice,thresholdGrade,thresholdCourses);
+        if (result == -1){
+            String error = "The student has already been assigned to another subject!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
+        else {
+            return "redirect:/professor/main-menu";
+        }
     }
 
     @RequestMapping("/delete-subject")
     public String deleteSubject(@RequestParam("subjectId") int theId) {
-
         subjectService.deleteById(theId);
-
-        return "redirect:/professor/list-subject";
-
+        return "redirect:/professor/subject-list";
     }
 
     @RequestMapping("/grade-form")
@@ -162,8 +208,13 @@ public class ProfessorController {
     public String saveGrade(@RequestParam("thesisID") int th_ID,
                            @RequestParam("implementationGrade") float implGrade,
                            @RequestParam("presentationGrade") float presGrade,
-                           @RequestParam("reportGrade") float reportGrade){
-
+                           @RequestParam("reportGrade") float reportGrade,
+                            Model theModel){
+        if (implGrade > 10 || implGrade < 0 || presGrade > 10 || presGrade < 0 || reportGrade > 10 || reportGrade < 0){
+            String error = "Invalid grade values!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
         thesisService.setGrade(th_ID,implGrade,presGrade,reportGrade);
         return "redirect:/professor/main-menu";
     }

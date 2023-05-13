@@ -46,11 +46,21 @@ public class StudentController {
 
     @RequestMapping("/save")
     public String saveProfile(@ModelAttribute("student") Student theStudent, Model theModel){
+        if (theStudent.getCurrentAvgGrade() < 5 || theStudent.getCurrentAvgGrade() > 10){
+            String error = "Current Average Grade must be between 5 and 10";
+            theModel.addAttribute("errorMessage", error);
+            return "student/error";
+        }
+        else if (theStudent.getNumberOfRemCourses() < 0){
+            String error = "Number of Remaining Courses must not be negative";
+            theModel.addAttribute("errorMessage", error);
+            return "student/error";
+        }
         studentService.saveProfile(theStudent);
         return "redirect:/student/main-menu";
     }
 
-    @RequestMapping("/list-subject")
+    @RequestMapping("/subject-list")
     public String listSubjects(Model theModel) {
         List<Subject> allSubjects = subjectService.findAll();
         theModel.addAttribute("subjects", allSubjects);
@@ -79,8 +89,21 @@ public class StudentController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Student theStudent = studentService.retrieveProfile(auth.getName());
         Subject theSubject = subjectService.findById(sub_id);
-        studentService.applyToSubject(theSubject.getTitle(), theStudent);
-        return "student/subject-list";
+        boolean duplicateApplication = studentService.checkForDuplicateApplication(theStudent,theSubject);
+        if (duplicateApplication){
+            String error = "You have already applied to this subject!";
+            theModel.addAttribute("errorMessage", error);
+            return "/student/error";
+        }
+        else if (!theSubject.isSub_availability()){
+            String error = "This subject is not available for application!";
+            theModel.addAttribute("errorMessage", error);
+            return "/student/error";
+        }
+        else {
+            studentService.applyToSubject(theSubject.getTitle(), theStudent);
+            return "redirect:/student/main-menu";
+        }
     }
 
     @RequestMapping("/subjectDetails")
