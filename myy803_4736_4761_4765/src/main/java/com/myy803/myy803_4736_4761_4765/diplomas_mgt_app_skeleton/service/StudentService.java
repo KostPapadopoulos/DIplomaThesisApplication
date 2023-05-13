@@ -24,5 +24,6 @@ public interface StudentService {
 
     public void save(Student theStudent);
 
-    //public void deleteById(String userName);
+    public boolean checkForDuplicateApplication(Student theStudent, Subject theSUbject);
+
 }

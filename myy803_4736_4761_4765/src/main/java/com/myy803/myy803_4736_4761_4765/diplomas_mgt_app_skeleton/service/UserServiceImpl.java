@@ -53,19 +53,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         if (theUser.getRole() == Role.STUDENT){
             Student newStudent = new Student(theUser.getUsername());
-            //newStudent.
-            //newStudent.setUser(theUser);
-            //newStudent.getUser().setUs_id(theUser.getUs_id());
             studentDAO.save(newStudent);
         }
 
         if (theUser.getRole() == Role.PROFESSOR){
             Professor newProfessor = new Professor(theUser.getUsername());
-            //newProfessor.setUser(theUser);
-            //newProfessor.getUser().setUs_id(theUser.getUs_id());
             professorDAO.save(newProfessor);
         }
-
     }
 
     @Override

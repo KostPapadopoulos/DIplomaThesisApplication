@@ -92,6 +92,19 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(theStudent);
     }
 
+    @Override
+    public boolean checkForDuplicateApplication(Student theStudent, Subject theSUbject) {
+        List<Application> allApplications = applicationDAO.findAll();
+        boolean duplicate = false;
+        for (Application a : allApplications){
+            if (a.getStudent().getUsername().equals(theStudent.getUsername()) && a.getSubject().getSub_id() == theSUbject.getSub_id()){
+                duplicate = true;
+                break;
+            }
+        }
+        return duplicate;
+    }
+
     /*
     @Override
     @Transactional

@@ -111,7 +111,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     @Transactional
-    public void assignSubject(String subjectName, String strategyName, int thresholdG, int thresholdC) {
+    public int assignSubject(String subjectName, String strategyName, float thresholdG, int thresholdC) {
         Subject theSubject = subjectDAO.findByTitle(subjectName);
         BestApplicantStrategy theStrategy = BestApplicantStrategyFactory.createStrategy(strategyName,thresholdG, thresholdC);
         List<Application> allApplications = applicationDAO.findAll();
@@ -122,9 +122,50 @@ public class ProfessorServiceImpl implements ProfessorService {
             }
         }
         Student theStudent = theStrategy.findBestApplicant(subApplications);
+        boolean sameStudent = checkForSameName(theStudent.getUsername());
+        if (sameStudent){
+            return -1;
+        }
         Thesis newThesis = new Thesis(theStudent,theSubject);
         thesisDAO.save(newThesis);
         theSubject.setSub_availability(false);
         subjectDAO.save(theSubject);
+        return 0;
+    }
+
+    @Override
+    public boolean checkForSameTitle(Subject theSubject) {
+        List<Subject> allSubjects = subjectDAO.findAll();
+        boolean result = false;
+        for (Subject s : allSubjects){
+            if (s.getTitle().equals(theSubject.getTitle())){
+                result = true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkForSameAssignement(int sub_id){
+        List<Thesis> theses = thesisDAO.findAll();
+        boolean result = false;
+        for (Thesis t : theses){
+            if (t.getSubject().getSub_id() == sub_id){
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean checkForSameName(String studentUsername){
+        List<Thesis> theses = thesisDAO.findAll();
+        boolean result = false;
+        for (Thesis t : theses){
+            if (t.getStudent().getUsername().equals(studentUsername)){
+                result = true;
+            }
+        }
+        return result;
     }
 }

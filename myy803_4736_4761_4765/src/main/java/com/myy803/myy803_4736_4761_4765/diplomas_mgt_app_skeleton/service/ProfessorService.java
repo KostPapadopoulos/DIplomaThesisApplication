@@ -20,6 +20,11 @@ public interface ProfessorService {
 
     public List<Thesis> listProfessorThesis(Professor theProfessor);
 
-    public void assignSubject(String str, String in, int th1, int th2);
+    public int assignSubject(String str, String in, float th1, int th2);
 
+    public boolean checkForSameTitle(Subject theSubject);
+
+    public boolean checkForSameAssignement(int sub_id);
+
+    public boolean checkForSameName(String userName);
 }
