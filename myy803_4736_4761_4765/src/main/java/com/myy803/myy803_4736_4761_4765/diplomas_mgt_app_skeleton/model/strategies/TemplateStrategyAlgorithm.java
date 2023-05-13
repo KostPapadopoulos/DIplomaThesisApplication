@@ -10,14 +10,19 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
     public TemplateStrategyAlgorithm() {}
 
     public Student findBestApplicant(List<Application> application) {
-        Application j = application.get(0);
-        for (int i =1; i< application.size(); i++){
-            String temp = compareApplications(application.get(i),j);
-           if (temp.equals(application.get(i).getStudent().getUsername())) {
-               j = application.get(i);
-           }
+        if (application.size() < 2){
+            return application.get(0).getStudent();
         }
-        return j.getStudent();
+        else {
+            Application j = application.get(0);
+            for (int i =1; i< application.size(); i++){
+                String temp = compareApplications(application.get(i),j);
+                if (temp.equals(application.get(i).getStudent().getUsername())) {
+                    j = application.get(i);
+                }
+            }
+            return j.getStudent();
+        }
     }
     public abstract String compareApplications(Application app1, Application app2);
 }

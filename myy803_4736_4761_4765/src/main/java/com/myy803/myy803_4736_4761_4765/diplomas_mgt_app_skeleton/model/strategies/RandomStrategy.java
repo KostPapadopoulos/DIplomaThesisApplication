@@ -9,8 +9,13 @@ import java.util.Random;
 public class RandomStrategy implements BestApplicantStrategy {
     @Override
     public Student findBestApplicant(List<Application> application) {
-        Random rand = new Random();
-        Student result = application.get(rand.nextInt(application.size())).getStudent();
-        return result;
+        if (application.size() < 2) {
+            return application.get(0).getStudent();
+        }
+        else {
+            Random rand = new Random();
+            Student result = application.get(rand.nextInt(application.size())).getStudent();
+            return result;
+        }
     }
 }

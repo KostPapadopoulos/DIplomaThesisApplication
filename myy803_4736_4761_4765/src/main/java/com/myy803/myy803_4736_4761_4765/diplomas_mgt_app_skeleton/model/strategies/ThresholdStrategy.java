@@ -9,11 +9,11 @@ import java.util.Random;
 
 public class ThresholdStrategy implements BestApplicantStrategy{
 
-    private final int thresholdGrade;
+    private final float thresholdGrade;
 
     private final int thresholdCourses;
 
-    public ThresholdStrategy(int th1, int th2){
+    public ThresholdStrategy(float th1, int th2){
         this.thresholdGrade = th1;
         this.thresholdCourses = th2;
     }
