@@ -46,6 +46,13 @@ public class TestProfessorController {
     void testMockMvcIsNotNull(){
         Assertions.assertNotNull(mockMvc);
     }
-    
+
+    @WithMockUser(value = "zarras")
+    @Test
+    void testStudentMainMenuPage() throws Exception{
+        mockMvc.perform(get("/professor/main-menu")).
+                andExpect(status().isOk()).
+                andExpect(view().name("professor/main-menu"));
+    }
 
 }
