@@ -18,8 +18,6 @@ public interface StudentService {
 
     public Student retrieveProfile(String userName);
 
-    public List<Application> listStudentApplications(Student theStudent);
-
     public void applyToSubject(String subjectName, Student theStudent);
 
     public void save(Student theStudent);

@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS `STUDENT`;
 
 CREATE TABLE `STUDENT` (
     username VARCHAR(40) PRIMARY KEY,
-    email VARCHAR(40) UNIQUE,
     full_name VARCHAR(100) DEFAULT NULL,
     year_of_studies INT(2) DEFAULT NULL,
     current_avg_grade FLOAT(40)  DEFAULT NULL,

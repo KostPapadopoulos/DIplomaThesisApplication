@@ -1,7 +1,5 @@
 package com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller;
 
-import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Role;
-import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.User;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

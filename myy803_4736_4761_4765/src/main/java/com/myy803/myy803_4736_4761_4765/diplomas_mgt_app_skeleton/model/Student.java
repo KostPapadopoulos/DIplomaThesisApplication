@@ -17,10 +17,6 @@ public class Student {
     @Column(name = "username")
     private String username;
 
-    @Column (name = "email")
-    private String email;
-
-
     @Column (name = "full_name")
     private String fullName;
 

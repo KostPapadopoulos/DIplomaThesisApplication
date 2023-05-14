@@ -33,7 +33,7 @@ public class StudentController {
 
     @RequestMapping("/main-menu")
     public String getStudentMainMenu() {
-        return "/student/main-menu";
+        return "student/main-menu";
     }
 
     @RequestMapping("/profile")
@@ -65,15 +65,6 @@ public class StudentController {
         List<Subject> allSubjects = subjectService.findAll();
         theModel.addAttribute("subjects", allSubjects);
         return "student/subject-list";
-    }
-
-    @RequestMapping("/applications-list")
-    public String listStudentApplications(Model theModel){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Student theStudent = studentService.retrieveProfile(auth.getName());
-        List<Application> allApplications = studentService.listStudentApplications(theStudent);
-        theModel.addAttribute("applications list", allApplications);
-        return "/student/applications-list";
     }
 
     @RequestMapping("/showFormForEdit")

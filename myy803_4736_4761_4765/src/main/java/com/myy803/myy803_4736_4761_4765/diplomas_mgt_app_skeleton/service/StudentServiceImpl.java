@@ -72,18 +72,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Application> listStudentApplications(Student theStudent) {
-        return theStudent.getApplications();
-    }
-
-    @Override
     @Transactional
     public void applyToSubject(String subjectName, Student theStudent) {
         Subject theSubject = subjectDAO.findByTitle(subjectName);
         Application newApplication = new Application(theSubject, theStudent);
         applicationDAO.save(newApplication);
-        //theStudent.getApplications().add(newApplication);
-
     }
 
     @Override
@@ -104,12 +97,4 @@ public class StudentServiceImpl implements StudentService {
         }
         return duplicate;
     }
-
-    /*
-    @Override
-    @Transactional
-    public void deleteById(String userName) {
-        studentRepository.deleteById(userName);
-    }
-    */
 }

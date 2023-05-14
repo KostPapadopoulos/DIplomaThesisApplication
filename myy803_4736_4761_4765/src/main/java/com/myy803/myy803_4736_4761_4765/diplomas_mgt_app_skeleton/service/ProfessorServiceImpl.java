@@ -77,12 +77,6 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     }
 
-    @Override
-    @Transactional
-    public List<Application> listApplications(String name) {
-        Subject theSubject = subjectDAO.findByTitle(name);
-        return theSubject.getApplicationList();
-    }
 
     @Override
     @Transactional

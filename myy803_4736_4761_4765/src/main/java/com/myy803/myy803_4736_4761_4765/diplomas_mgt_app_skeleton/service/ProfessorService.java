@@ -16,11 +16,9 @@ public interface ProfessorService {
 
     public void addSubject(String userName, Subject newSubject);
 
-    public List<Application> listApplications(String str);
-
     public List<Thesis> listProfessorThesis(Professor theProfessor);
 
-    public int assignSubject(String str, String in, float th1, int th2);
+    public int assignSubject(String subjectName, String strategyName, float th1, int th2);
 
     public boolean checkForSameTitle(Subject theSubject);
 
