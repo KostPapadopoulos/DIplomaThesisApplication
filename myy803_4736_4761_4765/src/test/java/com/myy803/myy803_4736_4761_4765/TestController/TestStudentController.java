@@ -2,21 +2,21 @@ package com.myy803.myy803_4736_4761_4765.TestController;
 
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller.StudentController;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.StudentService;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -40,9 +40,11 @@ public class TestStudentController {
     @Autowired
     StudentController studentController;
 
-    @Autowired
+    @MockBean
     StudentService studentService ;
 
+    @MockBean
+    SubjectService subjectService;
 
     @BeforeEach
     public void setup(){
@@ -90,38 +92,56 @@ public class TestStudentController {
                 andExpect(view().name("student/subject-list"));
     }
 
+
+    @WithMockUser(value = "zarras")
+    @Test
+   void testViewSubjectDetails() throws Exception{
+        int sub_id = 10;
+        Subject theSubject = new Subject();
+        theSubject.setSub_id(sub_id);
+        theSubject.setTitle("Test View Details");
+        when(subjectService.findById(sub_id)).thenReturn(theSubject);
+        mockMvc.perform(get("/student/subjectDetails").param("subjectid", String.valueOf(sub_id))).
+                andExpect(status().isOk()).
+                andExpect(view().name("student/view-details")).
+                andExpect(model().attribute("subject", theSubject));
+    }
     @WithMockUser(value = "zarras")
     @Test
     void testEditProfile() throws Exception{
-        String expectedUsername = "testuser";
-        Student expectedStudent = new Student();
-        expectedStudent.setUsername(expectedUsername);
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Student theStudent = new Student();
+        theStudent.setUsername("Kostas");
         // Mock the behavior of the studentService to return the expected student
-        when(studentService.retrieveProfile(expectedUsername)).thenReturn(expectedStudent);
+        when(studentService.retrieveProfile(auth.getName())).thenReturn(theStudent);
 
         // Perform the request to the controller
         mockMvc.perform(get("/student/showFormForEdit"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("student/student-form"))
-                .andExpect(model().attribute("username", expectedUsername))
-                .andExpect(model().attribute("student", expectedStudent));
-    }
-
-    @WithMockUser(value = "zarras")
-    @Test
-    void testApplyToSubject() throws Exception{
-        mockMvc.perform(get("/student/applyToSubject")).
-                andExpect(status().isOk()).
-                andExpect(view().name("redirect:student/main-menu"));
+                .andExpect(model().attribute("student", theStudent));
     }
 
 
     @WithMockUser(value = "zarras")
     @Test
-    void testViewSubjectDetails() throws Exception{
-        mockMvc.perform(get("/student/subjectDetails")).
-                andExpect(status().isOk()).
-                andExpect(view().name("student/view-details"));
+    void testApplyToSubject() throws Exception {
+        int subjectId = 9;
+        Subject subject = new Subject();
+        subject.setSub_id(subjectId);
+        subject.setTitle("Test Title");
+        subject.setSub_availability(true);
+        String username = "test";
+        Student student = new Student();
+        student.setUsername(username);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        when(studentService.retrieveProfile(auth.getName())).thenReturn(student);
+        when(subjectService.findById(subjectId)).thenReturn(subject);
+        when(studentService.checkForDuplicateApplication(student, subject))
+                .thenReturn(false);
+        mockMvc.perform(post("/student/applyToSubject").param("subjectid", String.valueOf(subjectId)))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/student/main-menu"));
     }
+
 }

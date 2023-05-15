@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/SubjectService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="434" y="94"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectServiceImpl" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/SubjectServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="487" y="315"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ThesisService" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/ThesisService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1261" y="93"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ThesisServiceImpl" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/ThesisServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1327" y="311"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserService" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/UserService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="616" y="503"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="6" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserServiceImpl" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/service/UserServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1304" y="727"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <realization id="7">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="8">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <realization id="9">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

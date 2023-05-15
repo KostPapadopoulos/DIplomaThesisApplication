@@ -34,6 +34,7 @@ public class Subject {
 
     public Subject() {}
 
+
     public Subject(String title, String objectives, boolean sub_availability, Professor professor){
         this.title = title;
         this.objectives = objectives;

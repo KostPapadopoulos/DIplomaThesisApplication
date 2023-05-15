@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.BestApplicantStrategy" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/BestApplicantStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="452" y="679"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="2" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.BestApplicantStrategyFactory" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/BestApplicantStrategyFactory.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="824" y="68"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.BestAvgGradeStrategy" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/BestAvgGradeStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="437" y="195"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.FewestCoursesStrategy" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/FewestCoursesStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1129" y="336"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.RandomStrategy" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/RandomStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="433" y="460"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.TemplateStrategyAlgorithm" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/TemplateStrategyAlgorithm.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1266" y="578"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" 
+    name="DIplomaThesisApplication.myy803_4736_4761_4765.src.main.java.com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.strategies.ThresholdStrategy" 
+    project="Project" 
+    file="/Project/DIplomaThesisApplication/myy803_4736_4761_4765/src/main/java/com/myy803/myy803_4736_4761_4765/diplomas_mgt_app_skeleton/model/strategies/ThresholdStrategy.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1050" y="817"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <realization id="9">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <generalization id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <realization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

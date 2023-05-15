@@ -47,14 +47,6 @@ public class ProfessorController {
         return "professor/main-menu";
     }
 
-    @RequestMapping("/profile")
-    public String retreiveProfile(Model theModel){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Professor theProfessor = professorService.retrieveProfile(auth.getName());
-        theModel.addAttribute("professor", theProfessor);
-        return "professor/profile";
-    }
-
     @RequestMapping("/save")
     public String saveProfile(@ModelAttribute("professor") Professor theProfessor, Model theModel){
         professorService.saveProfile(theProfessor);
@@ -147,7 +139,7 @@ public class ProfessorController {
     public String selectStrategy(@RequestParam("subjectId") int sub_ID, Model theModel){
         Subject theSubject = subjectService.findById(sub_ID);
         theModel.addAttribute("subject", theSubject);
-        return "/professor/select-strategy";
+        return "professor/select-strategy";
     }
 
 
@@ -179,8 +171,6 @@ public class ProfessorController {
             return "/professor/error";
         }
         Subject theSubject = subjectService.findById(subId);
-        System.out.println(thresholdGrade);
-        System.out.println(thresholdCourses);
         int result = professorService.assignSubject(theSubject.getTitle(),choice,thresholdGrade,thresholdCourses);
         if (result == -1){
             String error = "The student has already been assigned to another subject!";

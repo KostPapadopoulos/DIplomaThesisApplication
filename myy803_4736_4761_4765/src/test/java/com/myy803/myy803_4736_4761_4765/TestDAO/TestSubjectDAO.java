@@ -1,6 +1,8 @@
 package com.myy803.myy803_4736_4761_4765.TestDAO;
 
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.dao.ProfessorDAO;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.dao.SubjectDAO;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Professor;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +16,9 @@ public class TestSubjectDAO {
 
     @Autowired
     SubjectDAO subjectDAO;
+
+    @Autowired
+    ProfessorDAO professorDAO;
 
     @Test
     void testSubjectDAOJPAIsNotNull(){
@@ -32,5 +37,13 @@ public class TestSubjectDAO {
         Subject storedSubect = subjectDAO.findByTitle("Databases 2 ");
         Assertions.assertNotNull(storedSubect);
         Assertions.assertEquals("Vasileiadis", storedSubect.getProfessor().getUsername());
+    }
+
+    @Test
+    void testDeleteById(){
+        Subject storedSubect = subjectDAO.findById(11);
+        Assertions.assertNotNull(storedSubect);
+        subjectDAO.deleteById(11);
+        Assertions.assertNull(subjectDAO.findById(11));
     }
 }
