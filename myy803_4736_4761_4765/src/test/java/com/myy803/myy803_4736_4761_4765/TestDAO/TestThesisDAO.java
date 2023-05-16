@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application.properties")
 public class TestThesisDAO {
@@ -27,4 +30,10 @@ public class TestThesisDAO {
         Assertions.assertEquals("Thanasis", thesis.getStudent().getUsername());
     }
 
+    @Test
+    void testFindAllReturnsAllThesis(){
+        List<Thesis> allTheses = thesisDAO.findAll();
+        Assertions.assertNotNull(allTheses);
+        Assertions.assertEquals(3, allTheses.size());
+    }
 }

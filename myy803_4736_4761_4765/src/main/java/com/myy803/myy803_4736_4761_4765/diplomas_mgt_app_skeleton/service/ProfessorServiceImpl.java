@@ -136,7 +136,7 @@ public class ProfessorServiceImpl implements ProfessorService {
                 result = true;
             }
         }
-        return false;
+        return result;
     }
 
     @Override

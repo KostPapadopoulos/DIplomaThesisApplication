@@ -10,6 +10,8 @@ public interface ThesisService {
 
     public Thesis findById(int th_id);
 
+    public List<Thesis> findAll();
+
     public void setGrade(int th_ID, float implementationGrade, float presentationGrade, float reportGrade);
 
     public List<Thesis> getThesis(List<Subject> mySubjects);

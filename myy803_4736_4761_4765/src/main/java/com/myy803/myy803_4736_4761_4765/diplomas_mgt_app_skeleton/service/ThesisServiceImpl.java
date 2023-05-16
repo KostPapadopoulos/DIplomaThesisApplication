@@ -27,6 +27,12 @@ public class ThesisServiceImpl implements ThesisService{
     }
 
     @Override
+    public List<Thesis> findAll() {
+        List<Thesis> allThesis = thesisDAO.findAll();
+        return allThesis;
+    }
+
+    @Override
     @Transactional
     public void setGrade(int th_ID, float implementationGrade, float presentationGrade, float reportGrade) {
         float finalGrade = ((float) 0.7 * implementationGrade) + ((float) 0.15 * presentationGrade) + ((float)0.15 * reportGrade);

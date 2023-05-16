@@ -94,7 +94,7 @@ public class TestProfessorService {
     public void testCheckForSameTitle(){
         Subject subject = subjectDAO.findByTitle("Databases 2 ");
         boolean result = professorService.checkForSameTitle(subject);
-        Assertions.assertEquals(false,result);
+        Assertions.assertTrue(result);
     }
 
     @Test

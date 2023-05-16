@@ -183,7 +183,20 @@ public class ProfessorController {
     }
 
     @RequestMapping("/delete-subject")
-    public String deleteSubject(@RequestParam("subjectId") int theId) {
+    public String deleteSubject(@RequestParam("subjectId") int theId, Model theModel) {
+        Subject subject = subjectService.findById(theId);
+        List<Thesis> allTheses = thesisService.findAll();
+        boolean res = false;
+        for (Thesis s : allTheses){
+            if (s.getSubject().getSub_id() == theId){
+                res = true;
+            }
+        }
+        if (res){
+            String error = "The subject you're trying to delete is already assigned to a student!!";
+            theModel.addAttribute("errorMessage", error);
+            return "/professor/error";
+        }
         subjectService.deleteById(theId);
         return "redirect:/professor/subject-list";
     }
