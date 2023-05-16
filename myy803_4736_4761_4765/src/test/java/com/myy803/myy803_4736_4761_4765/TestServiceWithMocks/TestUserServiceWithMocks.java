@@ -8,7 +8,6 @@ import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserSe
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.UserServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;

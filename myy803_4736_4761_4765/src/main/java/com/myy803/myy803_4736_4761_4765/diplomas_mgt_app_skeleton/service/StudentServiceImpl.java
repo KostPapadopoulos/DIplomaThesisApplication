@@ -62,8 +62,6 @@ public class StudentServiceImpl implements StudentService {
         studentRepository.save(theStudent);
         
     }
-
-
     @Override
     @Transactional
     public Student retrieveProfile(String userName ) {

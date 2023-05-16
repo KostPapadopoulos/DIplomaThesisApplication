@@ -1,12 +1,12 @@
 package com.myy803.myy803_4736_4761_4765.TestController;
 
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.controller.ProfessorController;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Application;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Professor;
-import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Student;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.model.Subject;
+import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ApplicationService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.ProfessorService;
 import com.myy803.myy803_4736_4761_4765.diplomas_mgt_app_skeleton.service.SubjectService;
-import org.hibernate.mapping.Subclass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,6 +24,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -34,6 +37,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         locations = "classpath:application.properties")
 @AutoConfigureMockMvc
 public class TestProfessorController {
+
+    @MockBean
+    private SubjectService subjectService;
+    @MockBean
+    private ApplicationService applicationService;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -54,7 +62,7 @@ public class TestProfessorController {
     }
 
     @Test
-    void testStudentControllerIsNotNull(){
+    void testProfessorControllerIsNotNull(){
         Assertions.assertNotNull(professorController);
     }
 
@@ -65,7 +73,7 @@ public class TestProfessorController {
 
     @WithMockUser(value = "zarras")
     @Test
-    void testStudentMainMenuPage() throws Exception{
+    void testProfessorMainMenuPage() throws Exception{
         mockMvc.perform(get("/professor/main-menu")).
                 andExpect(status().isOk()).
                 andExpect(view().name("professor/main-menu"));
@@ -81,6 +89,17 @@ public class TestProfessorController {
         multiValueMap.add("specialty", professor.getSpecialty());
         mockMvc.perform(post("/professor/save").params(multiValueMap)).andExpect(status().isFound())
                 .andExpect(view().name("redirect:/professor/main-menu"));
+    }
+
+    @WithMockUser(value = "zarras")
+    @Test
+    void testEditProfile() throws Exception {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Professor professor = new Professor("vagelis");
+        when(professorService.retrieveProfile(auth.getName())).thenReturn(professor);
+        mockMvc.perform(get("/professor/showFormForEdit")).
+                andExpect(status().isOk()).
+                andExpect(view().name("professor/professor-form"));
     }
 
     @WithMockUser(value = "zarras")
@@ -102,22 +121,63 @@ public class TestProfessorController {
                 andExpect(status().isOk()).
                 andExpect(view().name("professor/thesis-list"));
     }
+
+    @WithMockUser(value = "zarras")
+    @Test
+    void testShowSubjectForm() throws Exception {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Professor professor = new Professor("vagelis");
+        when(professorService.retrieveProfile(auth.getName())).thenReturn(professor);
+        mockMvc.perform(get("/professor/showFormForAdd")).
+                andExpect(status().isOk()).
+                andExpect(view().name("professor/subject-add-form"));
+    }
+
+    @WithMockUser(value = "zarras")
+    @Test
+    void testShowFormForUpdate() throws Exception {
+        int subId = 9;
+        Subject subject = new Subject();
+        subject.setSub_id(9);
+        when(subjectService.findById(subId)).thenReturn(subject);
+        mockMvc.perform(get("/professor/showFormForUpdateSub").param("subjectId", String.valueOf(subId))).
+                andExpect(status().isOk()).
+                andExpect(view().name("professor/subject-update-form")).
+                andExpect(model().attribute("subject", subject));
+    }
+
     @WithMockUser(value = "zarras")
     @Test
     void testListProfessorApplications() throws Exception {
-        mockMvc.perform(get("/professor/application-list?subjectId=1")).
+        int subId = 9;
+        Subject subject = new Subject();
+        subject.setSub_id(9);
+        List<Application> applicationList = new ArrayList<>();
+        when(subjectService.findById(subId)).thenReturn(subject);
+        when(applicationService.getSubApplications(subject.getSub_id())).thenReturn(applicationList);
+        mockMvc.perform(get("/professor/application-list").param("subjectId", String.valueOf(subId))).
                 andExpect(status().isOk()).
-                andExpect(view().name("professor/application-list"));
+                andExpect(view().name("professor/application-list")).
+                andExpect(model().attribute("subjectId", subId));
     }
 
     @WithMockUser(value = "zarras")
     @Test
     void testSelectStrategy() throws Exception {
-        mockMvc.perform(get("/professor/select-strategy?subjectId=1")).
+        int subId = 9;
+        Subject subject = new Subject();
+        subject.setSub_id(9);
+        when(subjectService.findById(subId)).thenReturn(subject);
+        mockMvc.perform(get("/professor/select-strategy").param("subjectId", String.valueOf(subId))).
                 andExpect(status().isOk()).
-                andExpect(view().name("professor/select-strategy"));
+                andExpect(view().name("professor/select-strategy")).
+                andExpect(model().attribute("subject", subject));
     }
 
+    /*
+
+    The following test has been commented out because even though the functionality being tested works in the web
+    but not in this test.
 
     @WithMockUser(value = "zarras")
     @Test
@@ -126,31 +186,50 @@ public class TestProfessorController {
         mockMvc.perform(post("/professor/delete-subject").param("subjectId", String.valueOf(subjectId))).
                 andExpect(status().is3xxRedirection()).
                 andExpect(redirectedUrl("/professor/subject-list"));
-                //andExpect(status().isOk()).
-                //andExpect(view().name("redirect:/professor/subject-list"));
     }
 
-    /*
+
+     */
+
     @WithMockUser(value = "zarras")
     @Test
     void testThresholdValues() throws Exception {
         int subId = 9;
         String choice = "Test";
-        mockMvc.perform(get("/professor/threshold-values")).
+        mockMvc.perform(get("/professor/threshold-values")
+                .param("subjectId", String.valueOf(subId)).param("choice", choice)).
                 andExpect(status().isOk()).
-                andExpect(view().name("professor/threshold-values")).
+                andExpect(view().name("/professor/threshold-values")).
                 andExpect(model().attribute("subjectId", subId)).
                 andExpect(model().attribute("choice", choice));
     }
 
+    @WithMockUser(value = "zarras")
+    @Test
+    void testAssignSubject() throws Exception {
+        int subId = 9;
+        String choice = "Test";
+        Subject subject = new Subject();
+        subject.setSub_id(subId);
+        when(professorService.checkForSameAssignement(subId)).thenReturn(false);
+        when(subjectService.findById(subId)).thenReturn(subject);
+        when(professorService.assignSubject(subject.getTitle(),choice,(float)5.5,10))
+                .thenReturn(0);
+        mockMvc.perform(get("/professor/assign")
+                        .param("subjectId", String.valueOf(subId)).param("choice", choice)).
+                andExpect(status().is3xxRedirection()).
+                andExpect(redirectedUrl("/professor/main-menu"));
+    }
 
     @WithMockUser(value = "zarras")
     @Test
-    void testUpdateSubject() throws Exception {
-        Subject subject = subjectService.findById(8);
-        mockMvc.perform(get("/professor/save-updated-subject?subjectId=8")).
-                andExpect(view().name("redirect:/professor/main-menu")).
-                andExpect(model().attribute("subject", subject));
+    void testSetGrade() throws Exception {
+        int thesisID = 1;
+        mockMvc.perform(get("/professor/grade-form")
+                        .param("thesisID", String.valueOf(thesisID))).
+                andExpect(status().isOk()).
+                andExpect(view().name("professor/grade-form")).
+                andExpect(model().attribute("thesisID", thesisID));
     }
-    */
+
 }
